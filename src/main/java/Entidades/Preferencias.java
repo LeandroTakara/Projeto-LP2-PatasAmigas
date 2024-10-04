@@ -2,11 +2,11 @@ package Entidades;
 
 public class Preferencias {
 
-    String especie;
-    int idadeMinima;
-    int idadeMaxima;
-    String raca;
-    String sex;
+    private String especie;
+    private int idadeMinima;
+    private int idadeMaxima;
+    private String raca;
+    private String sex;
 
     public Preferencias(String especie, int idadeMinima, int idadeMaxima, String raca, String sex) {
         setEspecie(especie);

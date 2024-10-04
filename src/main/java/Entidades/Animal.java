@@ -2,24 +2,24 @@ package Entidades;
 
 public class Animal {
 
-    String nome;
-    String especie;
-    String raca;
-    int idade;
-    String sex;
-    String data_DeResgate;
-    String caminhoDaFoto;
-    String StatusDeAdocao;
+    private String nome;
+    private String especie;
+    private String raca;
+    private int idade;
+    private String sex;
+    private String data_DeResgate;
+    private String StatusDeAdocao;
+    private String historicoMedico;
 
-    public Animal(String nome, String especie, String raca, int idade, String sex, String data_DeResgate, String caminhoDaFoto, String statusDeAdocao) {
+    public Animal(String nome, String especie, String raca, int idade, String sex, String data_DeResgate, String statusDeAdocao, String historicoMedico) {
         setNome(nome);
         setEspecie(especie);
         setRaca(raca);
         setIdade(idade);
         setSex(sex);
         setData_DeResgate(data_DeResgate);
-        setCaminhoDaFoto(caminhoDaFoto);
         setStatusDeAdocao(statusDeAdocao);
+        setHistoricoMedico(historicoMedico);
     }
 
     public String getNome() {
@@ -70,19 +70,19 @@ public class Animal {
         this.data_DeResgate = data_DeResgate;
     }
 
-    public String getCaminhoDaFoto() {
-        return caminhoDaFoto;
-    }
-
-    public void setCaminhoDaFoto(String caminhoDaFoto) {
-        this.caminhoDaFoto = caminhoDaFoto;
-    }
-
     public String getStatusDeAdocao() {
         return StatusDeAdocao;
     }
 
     public void setStatusDeAdocao(String statusDeAdocao) {
         StatusDeAdocao = statusDeAdocao;
+    }
+
+    public String getHistoricoMedico() {
+        return historicoMedico;
+    }
+
+    public void setHistoricoMedico(String historicoMedico) {
+        this.historicoMedico = historicoMedico;
     }
 }

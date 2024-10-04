@@ -2,14 +2,23 @@ package Entidades;
 
 public class Historico {
 
-    Adotante adotante;
-    Tutor tutor;
-    String dataDeAdocao;
+    private int ID;
+    private static int IDGenerator = 0;
+    private Adotante adotante;
+    private Tutor tutor;
+    private Animal animal;
+    private String dataDeAdocao;
 
-    public Historico(Adotante adotante, Tutor tutor, String dataDeAdocao) {
+    public Historico(Adotante adotante, Tutor tutor, Animal animal, String dataDeAdocao) {
+        setID();
         setAdotante(adotante);
         setTutor(tutor);
-        setDataAdocao(dataDeAdocao);
+        setAnimal(animal);
+        setDataDeAdocao(dataDeAdocao);
+    }
+
+    private void setID(){
+        this.ID = IDGenerator++;
     }
 
     public Adotante getAdotante() {
@@ -28,11 +37,19 @@ public class Historico {
         this.tutor = tutor;
     }
 
-    public String getDataAdocao() {
+    public Animal getAnimal() {
+        return animal;
+    }
+
+    public void setAnimal(Animal animal) {
+        this.animal = animal;
+    }
+
+    public String getDataDeAdocao() {
         return dataDeAdocao;
     }
 
-    public void setDataAdocao(String dataDeAdocao) {
+    public void setDataDeAdocao(String dataDeAdocao) {
         this.dataDeAdocao = dataDeAdocao;
     }
 }

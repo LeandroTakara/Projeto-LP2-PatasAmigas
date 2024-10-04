@@ -85,15 +85,13 @@ public abstract class Pessoa {
 
     @Override
     public String toString() {
-        return "Pessoa{" +
-                "ID=" + ID +
+        return "ID=" + ID +
                 ", CPF='" + CPF + '\'' +
                 ", dataDeNascimento='" + dataDeNascimento + '\'' +
                 ", email='" + email + '\'' +
                 ", endereco='" + endereco + '\'' +
                 ", nome='" + nome + '\'' +
                 ", senha='" + senha + '\'' +
-                ", telefone='" + telefone + '\'' +
-                '}';
+                ", telefone='" + telefone;
     }
 }

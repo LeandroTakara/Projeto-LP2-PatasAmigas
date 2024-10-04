@@ -4,8 +4,9 @@ import java.util.ArrayList;
 
 public class Tutor extends Pessoa{
 
-    int qtdeAnimalSobCustodio;
-    ArrayList<Historico> historicoDeAdocoes;
+    private int qtdeAnimalSobCustodio;
+    private ArrayList<Historico> historicoDeAdocoes;
+    private boolean status = true;
 
     public Tutor(String CPF, String endereco, String nome, String dataDeNascimento, String email, String senha, String telefone, int qtdeAnimalSobCustodio) {
         super(CPF, endereco, nome, dataDeNascimento, email, senha, telefone);
@@ -28,11 +29,20 @@ public class Tutor extends Pessoa{
         historicoDeAdocoes.add(historico);
     }
 
+    public boolean getStatus() {
+        return status;
+    }
+
+    public void changeStatus() {
+        this.status = !status;
+    }
+
     @Override
     public String toString() {
         return "Tutor{" +
                 super.toString() + '\'' +
-                "qtdeAnimalSobCustodio=" + qtdeAnimalSobCustodio +
+                ", qtdeAnimalSobCustodio=" + qtdeAnimalSobCustodio + '\'' +
+                ", status=" + status +
                 '}';
     }
 }
