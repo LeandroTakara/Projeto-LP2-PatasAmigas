@@ -6,6 +6,7 @@ import Entidades.Funcionario;
 import Entidades.Pessoa;
 import Entidades.Tutor;
 
+
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
     private static boolean running = true;
@@ -66,12 +67,17 @@ public class Main {
         int opcaoTipo = inputOpcaoMenu("Escolha seu tipo de usuário: ", 0, 2);
 
         String tipo;
+        Class classe = null;
+
         if (opcaoTipo == 0) {
             tipo = "Tutor";
+            classe = Tutor.class;
         } else if (opcaoTipo == 1) {
             tipo = "Adotante";
+            classe = Adotante.class;
         } else {
             tipo = "Funcionário";
+            classe = Funcionario.class;
         }
 
         String nome = inputString("Digite seu nome: ");
@@ -80,7 +86,29 @@ public class Main {
 
         String email = inputString("Digite seu email: ");
 
+        boolean existe = false;
+
+        for (Pessoa usuario : usuarios) {
+            if (usuario.getClass() == classe && usuario.getEmail().equals(email)) existe = true;
+        }
+
+        while (existe) {
+            System.out.println("[AVISO] este email já está sendo utilizado");
+
+            email = inputString("Digite seu email: ");
+            existe = false;
+
+            for (Pessoa usuario : usuarios) {
+                if (usuario.getClass() == classe && usuario.getEmail().equals(email)) existe = true;
+            }
+        }
+
         String senha = inputString("Digite sua senha: ");
+
+        while (senha.isEmpty()) {
+            System.out.println("[ERROR] Senha não pode estar vazia");
+            senha = inputString("Digite sua senha: ");
+        }
 
         String endereco = inputString("Digite seu endereco: ");
 

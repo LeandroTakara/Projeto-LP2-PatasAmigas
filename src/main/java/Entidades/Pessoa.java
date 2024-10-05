@@ -1,9 +1,11 @@
 package Entidades;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.Objects;
+import Util.Encriptador;
+
 
 public abstract class Pessoa {
-
     private int ID;
     private static int IDGenerator = 0;
     private String CPF;
@@ -74,8 +76,11 @@ public abstract class Pessoa {
     }
 
     public void setSenha(String senha) {
-        
-        this.senha = senha;
+        try {
+            this.senha = Encriptador.encriptar(senha);
+        } catch (NoSuchAlgorithmException e) {
+            System.out.println("[ERRO] Não foi possível encriptar a senha");
+        }
     }
 
     public String getTelefone() {
@@ -108,6 +113,6 @@ public abstract class Pessoa {
 
     @Override
     public int hashCode() {
-        return Objects.hash(CPF, email, senha);
+        return Objects.hash(email, senha);
     }
 }
