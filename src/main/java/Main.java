@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import Entidades.Adotante;
+import Entidades.Funcionario;
 import Entidades.Pessoa;
 import Entidades.Tutor;
 
@@ -61,42 +62,48 @@ public class Main {
     public static void cadastrarUsuario() {
         System.out.println("[0] - Tutor");
         System.out.println("[1] - Adotante");
-        int opcaoTipo = inputOpcaoMenu("Escolhar seu tipo de usuário: ", 0, 1);
+        System.out.println("[2] - Funcionário");
+        int opcaoTipo = inputOpcaoMenu("Escolha seu tipo de usuário: ", 0, 2);
+
         String tipo;
         if (opcaoTipo == 0) {
             tipo = "Tutor";
-        } else {
+        } else if (opcaoTipo == 1) {
             tipo = "Adotante";
+        } else {
+            tipo = "Funcionário";
         }
 
-        System.out.print("Digite seu nome: ");
-        String nome = scanner.nextLine();
+        String nome = inputString("Digite seu nome: ");
 
-        System.out.print("Digite seu CPF: ");
-        String cpf = scanner.nextLine();
+        String cpf = inputString("Digite seu CPF: ");
 
-        System.out.print("Digite seu email: ");
-        String email = scanner.nextLine();
+        String email = inputString("Digite seu email: ");
 
-        System.out.print("Digite sua senha: ");
-        String senha = scanner.nextLine();
+        String senha = inputString("Digite sua senha: ");
 
-        System.out.print("Digite seu endereco: ");
-        String endereco = scanner.nextLine();
+        String endereco = inputString("Digite seu endereco: ");
 
-        System.out.print("Digite sua data de nascimento: ");
-        String dataDeNascimento = scanner.nextLine();
+        String dataDeNascimento = inputString("Digite sua data de nascimento: ");
 
-        System.out.print("Digite seu telefone: ");
-        String telefone = scanner.nextLine();
-
+        String telefone = inputString("Digite seu telefone: ");
 
         if (tipo == "Tutor") {
-            int qtdeAnimalSobCustodia = Integer.parseInt(scanner.nextLine());
+            int qtdeAnimalSobCustodia = inputInt("Digite o número de animais sob custodia: ");
 
             usuarios.add(new Tutor(cpf, endereco, nome, dataDeNascimento, email, senha, telefone, qtdeAnimalSobCustodia));
-        } else {
+        } else if (tipo == "Adotante") {
             usuarios.add(new Adotante(cpf, endereco, nome, dataDeNascimento, email, senha, telefone));
+        } else {
+            String dataDeContratacao = inputString("Digite sua data de contratação: ");
+
+            String cargo = inputString("Digite seu cargo: ");
+
+            double salario = inputDouble("Digite seu salário: ");
+
+            String departamento = inputString("Digite seu departamento: ");
+
+            usuarios.add(new Funcionario(cpf, endereco, nome, dataDeNascimento, email, senha, telefone, dataDeContratacao, cargo, salario, departamento));
         }
     }
 
@@ -105,17 +112,8 @@ public class Main {
             System.out.println("Nenhum usuário cadastrado");
         } else {
             for (Pessoa usuario : usuarios) {
-                String tipo;
-
-                if (usuario instanceof Adotante) {
-                    tipo = "Adotante";
-                } else {
-                    tipo = "Tutor";
-                }
-
-                System.out.format("%s - %s", tipo, usuario.getNome());
+                System.out.println(usuario);
             }
-            System.out.println();
         }
     }
 
@@ -123,17 +121,7 @@ public class Main {
         int opcao;
 
         while (true) {            
-            while (true) {
-                System.out.print(prompt);
-                String input = scanner.nextLine();
-
-                try {
-                    opcao = Integer.parseInt(input);
-                    break;
-                } catch (NumberFormatException e) {
-                    System.out.println("[ERRO] Digite um NÚMERO!");
-                }
-            }
+            opcao = inputInt(prompt);
 
             if (opcao >= minimo && opcao <= maximo) {
                 break;
@@ -143,5 +131,48 @@ public class Main {
         }
 
         return opcao;
+    }
+
+    public static int inputInt(String prompt) {
+        int value;
+
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine();
+
+            try {
+                value = Integer.parseInt(input);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("[ERRO] Digite um NÚMERO!");
+            }
+        }
+
+        return value;
+    }
+
+    public static double inputDouble(String prompt) {
+        double value;
+
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine();
+
+            try {
+                value = Double.parseDouble(input);
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("[ERRO] Digite um NÚMERO!");
+            }
+        }
+
+        return value;
+    }
+
+    public static String inputString(String prompt) {
+        System.out.print(prompt);
+        String value = scanner.nextLine();
+
+        return value;
     }
 }
