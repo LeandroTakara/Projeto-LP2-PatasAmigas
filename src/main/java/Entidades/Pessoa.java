@@ -1,5 +1,7 @@
 package Entidades;
 
+import java.util.Objects;
+
 public abstract class Pessoa {
 
     private int ID;
@@ -94,5 +96,18 @@ public abstract class Pessoa {
                 ", nome='" + nome + '\'' +
                 ", senha='" + senha + '\'' +
                 ", telefone='" + telefone;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Pessoa pessoa = (Pessoa) o;
+        return Objects.equals(CPF, pessoa.CPF) || (Objects.equals(email, pessoa.email) && Objects.equals(senha, pessoa.senha));
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(CPF, email, senha);
     }
 }
