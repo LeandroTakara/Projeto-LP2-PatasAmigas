@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 import Entidades.*;
@@ -246,9 +247,48 @@ public class Main {
                     System.out.println("=== x ===");
                     break;
                 case 2:
-                    System.out.println("=== Lista de animais cadastrados ===");
-                    Tabelar.tabelarAnimal(animais);
+
+                    System.out.println("[0] - Não");
+                    System.out.println("[1] - Sim");
+                    int opcao2 = inputOpcaoMenu("Deseja adicionar algum filtro? ", 0, 1);
+
+                    if (opcao2 == 0){
+                        System.out.println("=== Lista de animais cadastrados ===");
+                        Tabelar.tabelarAnimal(animais, null, null);
+                    }
+                    else {
+                        String filtroNome = "";
+                        String filtroDescricao = "";
+
+                        System.out.println("============ filtros ============");
+                        System.out.println("[0] - Espécie");
+                        System.out.println("[1] - Raça");
+                        System.out.println("[2] - Sexo");
+                        int opcao3 = inputOpcaoMenu("Qual filtro deseja adicionar? ", 0, 4);
+
+                        switch (opcao3) {
+                            case 0:
+                                filtroNome = "especie";
+                                filtroDescricao = inputString("Digite a espécie de animal que está buscando: ");
+
+                                break;
+                            case 1:
+                                filtroNome = "raca";
+                                filtroDescricao = inputString("Digite a raça de animal que está buscando: ");
+                                break;
+                            case 2:
+                                filtroNome = "sexo";
+                                filtroDescricao = inputString("Digite o sexo de animal que está buscando: ");
+                                break;
+                            default:
+                                break;
+                        }
+                        System.out.println("=== x ===");
+                        System.out.println("=== Lista de animais cadastrados ===");
+                        Tabelar.tabelarAnimal(animais, filtroNome, filtroDescricao);
+                    }
                     System.out.println("=== x ===");
+
                     break;
                 case 3:
                     System.out.println("=== Preferências de animais ===");

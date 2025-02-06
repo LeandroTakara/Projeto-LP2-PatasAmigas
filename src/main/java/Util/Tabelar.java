@@ -14,12 +14,18 @@ public class Tabelar {
         return x;
     }
 
-    public static void tabelarAnimal(ArrayList<Animal>  animais){
+    public static void tabelarAnimal(ArrayList<Animal>  animais, String filtroNome, String filtroDescricao){
 
         System.out.println("+----------------------+----------------------+----------------------+-------+----------------------+----------------------+----------------------+----------------------+");
         System.out.println("|         Nome         +        Espécie       +         Raça         + Idade +         Sexo         +    Data de Resgate   +   Status de Adoção   +   Histórico médico   |");
 
         for (Animal animal: animais) {
+
+            if(filtroNome != null){
+                if((filtroNome.equals("especie") && !(animal.getEspecie().equals(filtroDescricao))) || (filtroNome.equals("raca") && !(animal.getRaca().equals(filtroDescricao))) || (filtroNome.equals("sexo") && !(animal.getSex().equals(filtroDescricao))))
+                    continue;
+            }
+
             String animalNome = animal.getNome();
             if(animalNome.length() > 20){
                 animalNome = animalNome.substring(0, 17) + "...";
