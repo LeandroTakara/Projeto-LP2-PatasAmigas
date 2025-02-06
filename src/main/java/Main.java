@@ -1,10 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import Entidades.Adotante;
-import Entidades.Funcionario;
-import Entidades.Pessoa;
-import Entidades.Tutor;
+import Entidades.*;
+import Util.Tabelar;
 
 
 public class Main {
@@ -13,7 +11,14 @@ public class Main {
     private static ArrayList<Pessoa> usuarios = new ArrayList<>();
 
     public static void main(String[] args) {
+
+        //Animal julim = new Animal("julisssssssssssssssssssssm", "cachorrssssssssssssssssssso", "leopardo das neveskkkkkkkk", 132, "não fez hoje(ainda)", "12/2039/203sssssssssssss4", "adotado", "n/sssssssssssssssssssssssssssssssa");
+        //Usuario bito = new Usuario("497.232.338-86", "Rua jaboticabal,41, jardim antonio picosse", "João Vitor", "25/08/2006", "jvpsoares2006@gmail.com", "macaco132Cenha", "94533-3013", 132);
+
         mostrarTitulo();
+
+        //Tabelar.tabelarAnimal(julim);
+        //Tabelar.tabelarUsuario(bito);
 
         rodarAplicacao();
     }
@@ -37,8 +42,9 @@ public class Main {
             System.out.println("[0] - Sair");
             System.out.println("[1] - Cadastrar");
             System.out.println("[2] - Listar");
+            System.out.println("[3] - Login temporário");
 
-            int opcao = inputOpcaoMenu("Escolha uma opção: ", 0, 2);
+            int opcao = inputOpcaoMenu("Escolha uma opção: ", 0, 3);
 
             switch (opcao) {
                 case 0:
@@ -52,6 +58,10 @@ public class Main {
                 case 2:
                     System.out.println("=== Lista de usuários cadastrados ===");
                     listarUsuarios();
+                    System.out.println("=== x ===");
+                    break;
+                case 3:
+                    homePage();
                     System.out.println("=== x ===");
                     break;
                 default:
@@ -202,5 +212,47 @@ public class Main {
         String value = scanner.nextLine();
 
         return value;
+
+    }
+
+    public static void homePage(){
+
+        boolean rodando = true;
+
+        while(rodando){
+            System.out.println("============ Homepage ============");
+            System.out.println("[0] - Sair");
+            System.out.println("[1] - Cadastrar animal para adoção");
+            System.out.println("[2] - Buscar animal para adoção");
+            System.out.println("[3] - Personalizar preferências");
+            System.out.println("[4] - Apresentar meus dados");
+
+            int opcao = inputOpcaoMenu("Escolha uma opção: ", 0, 4);
+
+            switch (opcao) {
+                case 0:
+                    rodando = false;
+                    break;
+                case 1:
+                    System.out.println("=== Cadastro de animal ===");
+                    System.out.println("=== x ===");
+                    break;
+                case 2:
+                    System.out.println("=== Lista de animais cadastrados ===");
+                    System.out.println("=== x ===");
+                    break;
+                case 3:
+                    System.out.println("=== Preferências de animais ===");
+                    System.out.println("=== x ===");
+                    break;
+
+                case 4:
+                    System.out.println("=== Dados da conta ===");
+                    System.out.println("=== x ===");
+                    break;
+                default:
+                    break;
+            }
+        }
     }
 }
