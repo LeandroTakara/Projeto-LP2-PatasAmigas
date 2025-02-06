@@ -1,23 +1,26 @@
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Scanner;
 
 import Entidades.*;
+import Util.Encriptador;
 import Util.Tabelar;
 
 
 public class Main {
     private static Scanner scanner = new Scanner(System.in);
     private static boolean running = true;
-    private static ArrayList<Pessoa> usuarios = new ArrayList<>();
+    private static ArrayList<Usuario> usuarios = new ArrayList<>();
     private static ArrayList<Animal> animais = new ArrayList<>();
     private static Usuario usuarioLogado;
 
     //quando colocar sistema de login, mudar isso
-    static Usuario bito = new Usuario("497.232.338-86", "Rua jaboticabal,41, jardim antonio picosse", "João Vitor", "25/08/2006", "jvpsoares2006@gmail.com", "macaco132Cenha", "94533-3013", 132);
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NoSuchAlgorithmException {
+
+        Usuario bito = new Usuario("497.232.338-86", "Rua jaboticabal,41, jardim antonio picosse", "João Vitor", "25/08/2006", "a@a", "bito", "94533-3013");
+        usuarios.add(bito);
 
         Animal julim = new Animal("julisssssssssssssssssssssm", "cachorrssssssssssssssssssso", "leopardo das neveskkkkkkkk", 132, "não fez hoje(ainda)", "12/2039/203sssssssssssss4", "n/sssssssssssssssssssssssssssssssa", bito);
         animais.add(julim);
@@ -44,12 +47,12 @@ public class Main {
         System.out.println("=============================================");
     }
 
-    public static void rodarAplicacao() {
+    public static void rodarAplicacao() throws NoSuchAlgorithmException {
         while (running) {
             System.out.println("[0] - Sair");
             System.out.println("[1] - Cadastrar");
             System.out.println("[2] - Listar");
-            System.out.println("[3] - Login temporário");
+            System.out.println("[3] - Login");
 
             int opcao = inputOpcaoMenu("Escolha uma opção: ", 0, 3);
 
@@ -68,9 +71,22 @@ public class Main {
                     System.out.println("=== x ===");
                     break;
                 case 3:
-                    usuarioLogado = bito;
-                    homePage();
-                    System.out.println("=== x ===");
+                    System.out.println("=== Login ===");
+                    String email = inputString("Digite seu email: ");
+                    String senha = Encriptador.encriptar(inputString("Digite sua senha: "));
+
+                    Usuario user = logarUsuario(email, senha);
+
+                    if(user != null){
+                        usuarioLogado = user;
+                        homePage();
+                        System.out.println("=== x ===");
+
+                    }
+                    else{
+                        System.out.println("=== email ou senha incorretos ===");
+                    }
+
                     break;
                 default:
                     break;
@@ -79,24 +95,6 @@ public class Main {
     }
 
     public static void cadastrarUsuario() {
-        System.out.println("[0] - Tutor");
-        System.out.println("[1] - Adotante");
-        System.out.println("[2] - Funcionário");
-        int opcaoTipo = inputOpcaoMenu("Escolha seu tipo de usuário: ", 0, 2);
-
-        String tipo;
-        Class classe = null;
-
-        if (opcaoTipo == 0) {
-            tipo = "Tutor";
-            classe = Tutor.class;
-        } else if (opcaoTipo == 1) {
-            tipo = "Adotante";
-            classe = Adotante.class;
-        } else {
-            tipo = "Funcionário";
-            classe = Funcionario.class;
-        }
 
         String nome = inputString("Digite seu nome: ");
 
@@ -107,7 +105,7 @@ public class Main {
         boolean existe = false;
 
         for (Pessoa usuario : usuarios) {
-            if (usuario.getClass() == classe && usuario.getEmail().equals(email)) existe = true;
+            if (usuario.getEmail().equals(email)) existe = true;
         }
 
         while (existe) {
@@ -117,7 +115,7 @@ public class Main {
             existe = false;
 
             for (Pessoa usuario : usuarios) {
-                if (usuario.getClass() == classe && usuario.getEmail().equals(email)) existe = true;
+                if (usuario.getEmail().equals(email)) existe = true;
             }
         }
 
@@ -134,32 +132,14 @@ public class Main {
 
         String telefone = inputString("Digite seu telefone: ");
 
-        if (tipo == "Tutor") {
-            int qtdeAnimalSobCustodia = inputInt("Digite o número de animais sob custodia: ");
-
-            usuarios.add(new Tutor(cpf, endereco, nome, dataDeNascimento, email, senha, telefone, qtdeAnimalSobCustodia));
-        } else if (tipo == "Adotante") {
-            usuarios.add(new Adotante(cpf, endereco, nome, dataDeNascimento, email, senha, telefone));
-        } else {
-            String dataDeContratacao = inputString("Digite sua data de contratação: ");
-
-            String cargo = inputString("Digite seu cargo: ");
-
-            double salario = inputDouble("Digite seu salário: ");
-
-            String departamento = inputString("Digite seu departamento: ");
-
-            usuarios.add(new Funcionario(cpf, endereco, nome, dataDeNascimento, email, senha, telefone, dataDeContratacao, cargo, salario, departamento));
-        }
+        usuarios.add(new Usuario(cpf, endereco, nome, dataDeNascimento, email, senha, telefone));
     }
 
     public static void listarUsuarios() {
         if (usuarios.size() == 0) {
             System.out.println("Nenhum usuário cadastrado");
         } else {
-            for (Pessoa usuario : usuarios) {
-                System.out.println(usuario);
-            }
+            Tabelar.tabelarUsuario(usuarios);
         }
     }
 
@@ -297,6 +277,7 @@ public class Main {
 
                 case 4:
                     System.out.println("=== Dados da conta ===");
+                    Tabelar.tabelarUsuario2(usuarioLogado);
                     System.out.println("=== x ===");
                     break;
                 default:
@@ -315,5 +296,14 @@ public class Main {
         String historicoMedicoAnimal = inputString("Digite sobre o histórico médico do Animal: ");
 
         animais.add(new Animal(nomeAnimal, especieAnimal,racaAnimal, idadeAnimal, sexoAnimal, dataResgateAnimal, historicoMedicoAnimal, user));
+    }
+
+    public static Usuario logarUsuario(String email, String senha){
+        for (Usuario usuario : usuarios) {
+            if (usuario.getEmail().equals(email) && usuario.getSenha().equals(senha)){
+                return usuario;
+            }
+        }
+        return null;
     }
 }

@@ -100,85 +100,130 @@ public class Tabelar {
         System.out.println("+----------------------+----------------------+----------------------+-------+----------------------+----------------------+----------------------+----------------------+");
     }
 
-    public static void tabelarUsuario(Usuario usuario){
+    public static void tabelarUsuario(ArrayList<Usuario> usuarios){
 
-        String usuarioNome = usuario.getNome();
-        if(usuarioNome.length() > 20){
-            usuarioNome = usuarioNome.substring(0, 17) + "...";
+        System.out.println("+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+");
+        System.out.println("|         Nome         |         Email        |         Senha        |          CPF         |       Telefone       |  Data de nascimento  |       Endereço       |");
+
+        for (Pessoa usuario: usuarios) {
+            String usuarioNome = usuario.getNome();
+            if(usuarioNome.length() > 20){
+                usuarioNome = usuarioNome.substring(0, 17) + "...";
+            }
+            else{
+                usuarioNome += colocarEspaco(20 - usuarioNome.length());
+            }
+
+            String usuarioCPF = usuario.getCPF();
+            if(usuarioCPF.length() > 20){
+                usuarioCPF = usuarioCPF.substring(0, 17) + "...";
+            }
+            else{
+                usuarioCPF += colocarEspaco(20 - usuarioCPF.length());
+            }
+
+            String usuarioDataDeNascimento = usuario.getDataDeNascimento();
+            if(usuarioDataDeNascimento.length() > 20){
+                usuarioDataDeNascimento = usuarioDataDeNascimento.substring(0, 17) + "...";
+            }
+            else{
+                usuarioDataDeNascimento += colocarEspaco(20 - usuarioDataDeNascimento.length());
+            }
+
+            String usuarioEmail = usuario.getEmail();
+            if(usuarioEmail.length() > 20){
+                usuarioEmail = usuarioEmail.substring(0, 17) + "...";
+            }
+            else{
+                usuarioEmail += colocarEspaco(20 - usuarioEmail.length());
+            }
+
+            String usuarioEndereco = usuario.getEndereco();
+            if(usuarioEndereco.length() > 20){
+                usuarioEndereco = usuarioEndereco.substring(0, 17) + "...";
+            }
+            else{
+                usuarioEndereco += colocarEspaco(20 - usuarioEndereco.length());
+            }
+
+            String usuarioSenha = usuario.getSenha();
+            if(usuarioSenha.length() > 20){
+                usuarioSenha = usuarioSenha.substring(0, 17) + "...";
+            }
+            else{
+                usuarioSenha += colocarEspaco(20 - usuarioSenha.length());
+            }
+
+            String usuarioTelefone = usuario.getTelefone();
+            if(usuarioTelefone.length() > 20){
+                usuarioTelefone = usuarioTelefone.substring(0, 17) + "...";
+            }
+            else{
+                usuarioTelefone += colocarEspaco(20 - usuarioTelefone.length());
+            }
+
+            System.out.println("+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+");
+            System.out.format("| %s ", usuarioNome);
+            System.out.format("| %s ", usuarioEmail);
+            System.out.format("| %s ", usuarioSenha);
+            System.out.format("| %s ", usuarioCPF);
+            System.out.format("| %s ", usuarioTelefone);
+            System.out.format("| %s ", usuarioDataDeNascimento);
+            System.out.format("| %s |\n", usuarioEndereco);
         }
-        else{
-            usuarioNome += colocarEspaco(20 - usuarioNome.length());
+        System.out.println("+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+");
+    }
+
+    public static void tabelarUsuario2(Usuario usuario) {
+        // Definindo os rótulos (nomes dos campos) na coluna da esquerda
+        String[] campos = {
+                "Nome",
+                "Email",
+                "Senha",
+                "CPF",
+                "Telefone",
+                "Data de Nascimento",
+                "Endereço"
+        };
+
+        // Obtendo os valores correspondentes na coluna da direita
+        String[] valores = {
+                usuario.getNome(),
+                usuario.getEmail(),
+                usuario.getSenha(),
+                usuario.getCPF(),
+                usuario.getTelefone(),
+                usuario.getDataDeNascimento(),
+                usuario.getEndereco()
+        };
+
+        // Encontrar a largura máxima da coluna da esquerda (campos)
+        int larguraCampos = 0;
+        for (String campo : campos) {
+            if (campo.length() > larguraCampos) {
+                larguraCampos = campo.length();
+            }
         }
 
-        String usuarioCPF = usuario.getCPF();
-        if(usuarioCPF.length() > 20){
-            usuarioCPF = usuarioCPF.substring(0, 17) + "...";
-        }
-        else{
-            usuarioCPF += colocarEspaco(20 - usuarioCPF.length());
-        }
-
-        String usuarioDataDeNascimento = usuario.getDataDeNascimento();
-        if(usuarioDataDeNascimento.length() > 20){
-            usuarioDataDeNascimento = usuarioDataDeNascimento.substring(0, 17) + "...";
-        }
-        else{
-            usuarioDataDeNascimento += colocarEspaco(20 - usuarioDataDeNascimento.length());
+        // Encontrar a largura máxima da coluna da direita (valores)
+        int larguraValores = 0;
+        for (String valor : valores) {
+            if (valor.length() > larguraValores) {
+                larguraValores = valor.length();
+            }
         }
 
-        String usuarioEmail = usuario.getEmail();
-        if(usuarioEmail.length() > 20){
-            usuarioEmail = usuarioEmail.substring(0, 17) + "...";
-        }
-        else{
-            usuarioEmail += colocarEspaco(20 - usuarioEmail.length());
-        }
+        // Criar a linha de separação da tabela
+        String linhaSeparadora = "+" + "-".repeat(larguraCampos + 2) + "+" + "-".repeat(larguraValores + 2) + "+";
 
-        String usuarioEndereco = usuario.getEndereco();
-        if(usuarioEndereco.length() > 20){
-            usuarioEndereco = usuarioEndereco.substring(0, 17) + "...";
-        }
-        else{
-            usuarioEndereco += colocarEspaco(20 - usuarioEndereco.length());
-        }
+        // Imprimir a tabela
+        System.out.println(linhaSeparadora);
 
-        String usuarioSenha = usuario.getSenha();
-        if(usuarioSenha.length() > 20){
-            usuarioSenha = usuarioSenha.substring(0, 17) + "...";
+        // Imprimir os campos e valores com separadores entre cada linha
+        for (int i = 0; i < campos.length; i++) {
+            System.out.format("| %-" + larguraCampos + "s | %-" + larguraValores + "s |\n", campos[i], valores[i]);
+            System.out.println(linhaSeparadora); // Separador após cada linha
         }
-        else{
-            usuarioSenha += colocarEspaco(20 - usuarioSenha.length());
-        }
-
-        String usuarioTelefone = usuario.getTelefone();
-        if(usuarioTelefone.length() > 20){
-            usuarioTelefone = usuarioTelefone.substring(0, 17) + "...";
-        }
-        else{
-            usuarioTelefone += colocarEspaco(20 - usuarioTelefone.length());
-        }
-
-        String usuarioQtdeAnimalSobCustodio = Integer.toString(usuario.getQtdeAnimalSobCustodio());
-        if(usuarioQtdeAnimalSobCustodio.length() > 20){
-            usuarioQtdeAnimalSobCustodio = usuarioQtdeAnimalSobCustodio.substring(0, 17) + "...";
-        }
-        else{
-            usuarioQtdeAnimalSobCustodio += colocarEspaco(20 - usuarioQtdeAnimalSobCustodio.length());
-        }
-
-
-        System.out.println("+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+");
-        System.out.println("|         Nome         +         Email        +         Senha        +          CPF         +       Telefone       +  Data de nascimento  +       Endereço       + Animais sob custódia |");
-        System.out.println("+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+");
-        System.out.format("| %s ", usuarioNome);
-        System.out.format("| %s ", usuarioEmail);
-        System.out.format("| %s ", usuarioSenha);
-        System.out.format("| %s ", usuarioCPF);
-        System.out.format("| %s ", usuarioTelefone);
-        System.out.format("| %s ", usuarioDataDeNascimento);
-        System.out.format("| %s ", usuarioEndereco);
-        System.out.format("| %s |\n", usuarioQtdeAnimalSobCustodio);
-        System.out.println("+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+----------------------+");
     }
 
 }

@@ -7,11 +7,9 @@ public class Usuario extends Pessoa{
     private ArrayList<Historico> historicoDeAdocoes;
     private Preferencias preferenciasDeAdocao;
 
-    private int qtdeAnimalSobCustodio;
     private boolean status = true;
-    public Usuario(String CPF, String endereco, String nome, String dataDeNascimento, String email, String senha, String telefone, int qtdeAnimalSobCustodio) {
+    public Usuario(String CPF, String endereco, String nome, String dataDeNascimento, String email, String senha, String telefone) {
         super(CPF, endereco, nome, dataDeNascimento, email, senha, telefone);
-        setQtdeAnimalSobCustodio(qtdeAnimalSobCustodio);
     }
 
     public ArrayList<Historico> getHistoricoDeAdocoes() {
@@ -30,14 +28,6 @@ public class Usuario extends Pessoa{
         this.preferenciasDeAdocao = preferenciasDeAdocao;
     }
 
-    public int getQtdeAnimalSobCustodio() {
-        return qtdeAnimalSobCustodio;
-    }
-
-    public void setQtdeAnimalSobCustodio(int qtdeAnimalSobCustodio) {
-        this.qtdeAnimalSobCustodio = qtdeAnimalSobCustodio;
-    }
-
     public boolean getStatus() {
         return status;
     }
@@ -52,7 +42,6 @@ public class Usuario extends Pessoa{
                 super.toString() + '\'' +
                 ", historicoDeAdocoes=" + historicoDeAdocoes + '\'' +
                 ", preferenciasDeAdocao=" + preferenciasDeAdocao + '\'' +
-                ", qtdeAnimalSobCustodio=" + qtdeAnimalSobCustodio + '\'' +
                 ", status=" + status +
                 '}';
     }
