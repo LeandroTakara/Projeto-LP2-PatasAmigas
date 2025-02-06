@@ -2,6 +2,8 @@ package Util;
 
 import Entidades.*;
 
+import java.util.ArrayList;
+
 public class Tabelar {
 
     private static String colocarEspaco(int qtde){
@@ -12,79 +14,83 @@ public class Tabelar {
         return x;
     }
 
-    public static void tabelarAnimal(Animal animal){
-
-        String animalNome = animal.getNome();
-        if(animalNome.length() > 20){
-            animalNome = animalNome.substring(0, 17) + "...";
-        }
-        else{
-            animalNome += colocarEspaco(20 - animalNome.length());
-        }
-
-        String animalEspecie = animal.getEspecie();
-        if(animalEspecie.length() > 20){
-            animalEspecie = animalEspecie.substring(0, 17) + "...";
-        }
-        else{
-            animalEspecie += colocarEspaco(20 - animalEspecie.length());
-        }
-
-        String animalRaca = animal.getRaca();
-        if(animalRaca.length() > 20){
-            animalRaca = animalRaca.substring(0, 17) + "...";
-        }
-        else{
-            animalRaca += colocarEspaco(20 - animalRaca.length());
-        }
-
-        String animalIdade = Integer.toString(animal.getIdade());
-        animalIdade += colocarEspaco(5 - animalIdade.length());
-
-        String animalSex = animal.getSex();
-        if(animalSex.length() > 20){
-            animalSex = animalSex.substring(0, 17) + "...";
-        }
-        else{
-            animalSex += colocarEspaco(20 - animalSex.length());
-        }
-
-        String animalData_DeResgate = animal.getData_DeResgate();
-        if(animalData_DeResgate.length() > 20){
-            animalData_DeResgate = animalData_DeResgate.substring(0, 17) + "...";
-        }
-        else{
-            animalData_DeResgate += colocarEspaco(20 - animalData_DeResgate.length());
-        }
-
-        String animalStatusDeAdocao = animal.getStatusDeAdocao();
-        if(animalStatusDeAdocao.length() > 20){
-            animalStatusDeAdocao = animalStatusDeAdocao.substring(0, 17) + "...";
-        }
-        else{
-            animalStatusDeAdocao += colocarEspaco(20 - animalStatusDeAdocao.length());
-        }
-
-        String animalHistoricoMedico = animal.getHistoricoMedico();
-        if(animalHistoricoMedico.length() > 20){
-            animalHistoricoMedico = animalHistoricoMedico.substring(0, 17) + "...";
-        }
-        else{
-            animalHistoricoMedico += colocarEspaco(20 - animalHistoricoMedico.length());
-        }
-
+    public static void tabelarAnimal(ArrayList<Animal>  animais){
 
         System.out.println("+----------------------+----------------------+----------------------+-------+----------------------+----------------------+----------------------+----------------------+");
         System.out.println("|         Nome         +        Espécie       +         Raça         + Idade +         Sexo         +    Data de Resgate   +   Status de Adoção   +   Histórico médico   |");
-        System.out.println("+----------------------+----------------------+----------------------+-------+----------------------+----------------------+----------------------+----------------------+");
-        System.out.format("| %s ", animalNome);
-        System.out.format("| %s ", animalEspecie);
-        System.out.format("| %s ", animalRaca);
-        System.out.format("| %s ", animalIdade);
-        System.out.format("| %s ", animalSex);
-        System.out.format("| %s ", animalData_DeResgate);
-        System.out.format("| %s ", animalStatusDeAdocao);
-        System.out.format("| %s |\n", animalHistoricoMedico);
+
+        for (Animal animal: animais) {
+            String animalNome = animal.getNome();
+            if(animalNome.length() > 20){
+                animalNome = animalNome.substring(0, 17) + "...";
+            }
+            else{
+                animalNome += colocarEspaco(20 - animalNome.length());
+            }
+
+            String animalEspecie = animal.getEspecie();
+            if(animalEspecie.length() > 20){
+                animalEspecie = animalEspecie.substring(0, 17) + "...";
+            }
+            else{
+                animalEspecie += colocarEspaco(20 - animalEspecie.length());
+            }
+
+            String animalRaca = animal.getRaca();
+            if(animalRaca.length() > 20){
+                animalRaca = animalRaca.substring(0, 17) + "...";
+            }
+            else{
+                animalRaca += colocarEspaco(20 - animalRaca.length());
+            }
+
+            String animalIdade = Integer.toString(animal.getIdade());
+            animalIdade += colocarEspaco(5 - animalIdade.length());
+
+            String animalSex = animal.getSex();
+            if(animalSex.length() > 20){
+                animalSex = animalSex.substring(0, 17) + "...";
+            }
+            else{
+                animalSex += colocarEspaco(20 - animalSex.length());
+            }
+
+            String animalData_DeResgate = animal.getData_DeResgate();
+            if(animalData_DeResgate.length() > 20){
+                animalData_DeResgate = animalData_DeResgate.substring(0, 17) + "...";
+            }
+            else{
+                animalData_DeResgate += colocarEspaco(20 - animalData_DeResgate.length());
+            }
+
+            String animalStatusDeAdocao = animal.getStatusDeAdocao();
+            if(animalStatusDeAdocao.length() > 20){
+                animalStatusDeAdocao = animalStatusDeAdocao.substring(0, 17) + "...";
+            }
+            else{
+                animalStatusDeAdocao += colocarEspaco(20 - animalStatusDeAdocao.length());
+            }
+
+            String animalHistoricoMedico = animal.getHistoricoMedico();
+            if(animalHistoricoMedico.length() > 20){
+                animalHistoricoMedico = animalHistoricoMedico.substring(0, 17) + "...";
+            }
+            else{
+                animalHistoricoMedico += colocarEspaco(20 - animalHistoricoMedico.length());
+            }
+
+            System.out.println("+----------------------+----------------------+----------------------+-------+----------------------+----------------------+----------------------+----------------------+");
+            System.out.format("| %s ", animalNome);
+            System.out.format("| %s ", animalEspecie);
+            System.out.format("| %s ", animalRaca);
+            System.out.format("| %s ", animalIdade);
+            System.out.format("| %s ", animalSex);
+            System.out.format("| %s ", animalData_DeResgate);
+            System.out.format("| %s ", animalStatusDeAdocao);
+            System.out.format("| %s |\n", animalHistoricoMedico);
+
+        }
+
         System.out.println("+----------------------+----------------------+----------------------+-------+----------------------+----------------------+----------------------+----------------------+");
     }
 

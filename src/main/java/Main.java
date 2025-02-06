@@ -9,11 +9,17 @@ public class Main {
     private static Scanner scanner = new Scanner(System.in);
     private static boolean running = true;
     private static ArrayList<Pessoa> usuarios = new ArrayList<>();
+    private static ArrayList<Animal> animais = new ArrayList<>();
+    private static Usuario usuarioLogado;
+
+    //quando colocar sistema de login, mudar isso
+    static Usuario bito = new Usuario("497.232.338-86", "Rua jaboticabal,41, jardim antonio picosse", "João Vitor", "25/08/2006", "jvpsoares2006@gmail.com", "macaco132Cenha", "94533-3013", 132);
+
 
     public static void main(String[] args) {
 
-        //Animal julim = new Animal("julisssssssssssssssssssssm", "cachorrssssssssssssssssssso", "leopardo das neveskkkkkkkk", 132, "não fez hoje(ainda)", "12/2039/203sssssssssssss4", "adotado", "n/sssssssssssssssssssssssssssssssa");
-        //Usuario bito = new Usuario("497.232.338-86", "Rua jaboticabal,41, jardim antonio picosse", "João Vitor", "25/08/2006", "jvpsoares2006@gmail.com", "macaco132Cenha", "94533-3013", 132);
+        Animal julim = new Animal("julisssssssssssssssssssssm", "cachorrssssssssssssssssssso", "leopardo das neveskkkkkkkk", 132, "não fez hoje(ainda)", "12/2039/203sssssssssssss4", "n/sssssssssssssssssssssssssssssssa", bito);
+        animais.add(julim);
 
         mostrarTitulo();
 
@@ -61,6 +67,7 @@ public class Main {
                     System.out.println("=== x ===");
                     break;
                 case 3:
+                    usuarioLogado = bito;
                     homePage();
                     System.out.println("=== x ===");
                     break;
@@ -235,10 +242,12 @@ public class Main {
                     break;
                 case 1:
                     System.out.println("=== Cadastro de animal ===");
+                    cadastrarAnimal(usuarioLogado);
                     System.out.println("=== x ===");
                     break;
                 case 2:
                     System.out.println("=== Lista de animais cadastrados ===");
+                    Tabelar.tabelarAnimal(animais);
                     System.out.println("=== x ===");
                     break;
                 case 3:
@@ -254,5 +263,17 @@ public class Main {
                     break;
             }
         }
+    }
+
+    public static void cadastrarAnimal(Usuario user){
+        String nomeAnimal = inputString("Digite o nome do Animal: ");
+        String especieAnimal = inputString("Digite a espécie do Animal: ");
+        String racaAnimal = inputString("Digite a raça do Animal: ");
+        int idadeAnimal = inputInt("Digite a idade do Animal: ");
+        String sexoAnimal = inputString("Digite o sexo do Animal: ");
+        String dataResgateAnimal = inputString("Digite a data de resgate do Animal, se houver: ");
+        String historicoMedicoAnimal = inputString("Digite sobre o histórico médico do Animal: ");
+
+        animais.add(new Animal(nomeAnimal, especieAnimal,racaAnimal, idadeAnimal, sexoAnimal, dataResgateAnimal, historicoMedicoAnimal, user));
     }
 }

@@ -8,18 +8,20 @@ public class Animal {
     private int idade;
     private String sex;
     private String data_DeResgate;
-    private String StatusDeAdocao;
+    private String StatusDeAdocao = "Não adotado";
     private String historicoMedico;
 
-    public Animal(String nome, String especie, String raca, int idade, String sex, String data_DeResgate, String statusDeAdocao, String historicoMedico) {
+    private Usuario pessoaEmPosse;
+
+    public Animal(String nome, String especie, String raca, int idade, String sex, String data_DeResgate, String historicoMedico, Usuario pessoaEmPosse) {
         setNome(nome);
         setEspecie(especie);
         setRaca(raca);
         setIdade(idade);
         setSex(sex);
         setData_DeResgate(data_DeResgate);
-        setStatusDeAdocao(statusDeAdocao);
         setHistoricoMedico(historicoMedico);
+        setPessoaEmPosse(pessoaEmPosse);
     }
 
     public String getNome() {
@@ -84,5 +86,13 @@ public class Animal {
 
     public void setHistoricoMedico(String historicoMedico) {
         this.historicoMedico = historicoMedico;
+    }
+
+    public Usuario getPessoaEmPosse() {
+        return pessoaEmPosse;
+    }
+
+    public void setPessoaEmPosse(Usuario pessoaEmPosse) {
+        this.pessoaEmPosse = pessoaEmPosse;
     }
 }
