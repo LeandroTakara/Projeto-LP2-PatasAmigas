@@ -2,6 +2,9 @@ package Entidades;
 
 public class Animal {
 
+    private int ID;
+    private static int IDGenerator = 1;
+
     private String nome;
     private String especie;
     private String raca;
@@ -14,6 +17,7 @@ public class Animal {
     private Usuario pessoaEmPosse;
 
     public Animal(String nome, String especie, String raca, int idade, String sex, String data_DeResgate, String historicoMedico, Usuario pessoaEmPosse) {
+        setID();
         setNome(nome);
         setEspecie(especie);
         setRaca(raca);
@@ -22,6 +26,14 @@ public class Animal {
         setData_DeResgate(data_DeResgate);
         setHistoricoMedico(historicoMedico);
         setPessoaEmPosse(pessoaEmPosse);
+    }
+
+    private void setID(){
+        this.ID = IDGenerator++;
+    }
+
+    public int getID() {
+        return ID;
     }
 
     public String getNome() {

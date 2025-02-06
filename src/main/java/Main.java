@@ -268,6 +268,23 @@ public class Main {
                         Tabelar.tabelarAnimal(animais, filtroNome, filtroDescricao);
                     }
                     System.out.println("=== x ===");
+                    System.out.println("Deseja adotar algum animal?");
+                    System.out.println("[0] - Não");
+                    System.out.println("[1] - Sim");
+                    int opcao3 = inputOpcaoMenu("Deseja adicionar algum filtro? ", 0, 1);
+
+                    if(opcao3 == 1){
+                        int animalEscolhido = inputInt("Digite o ID do animal que deseja adotar: ");
+                        Animal pet = adotarAnimal(animalEscolhido);
+                        if(pet == null){
+                            System.out.println("Digite um ID válido");
+                        }
+                        else{
+                            pet.setStatusDeAdocao("Adotado");
+                            System.out.println("Parabéns, você adotou um animal, cuide bem dele e sejam Felizes!!!");
+                            System.out.println("=== x ===");
+                        }
+                    }
 
                     break;
                 case 3:
@@ -302,6 +319,15 @@ public class Main {
         for (Usuario usuario : usuarios) {
             if (usuario.getEmail().equals(email) && usuario.getSenha().equals(senha)){
                 return usuario;
+            }
+        }
+        return null;
+    }
+
+    public static Animal adotarAnimal(int ID){
+        for (Animal animal: animais) {
+            if(animal.getID() == ID){
+                return animal;
             }
         }
         return null;

@@ -16,8 +16,8 @@ public class Tabelar {
 
     public static void tabelarAnimal(ArrayList<Animal>  animais, String filtroNome, String filtroDescricao){
 
-        System.out.println("+----------------------+----------------------+----------------------+-------+----------------------+----------------------+----------------------+----------------------+");
-        System.out.println("|         Nome         +        Espécie       +         Raça         + Idade +         Sexo         +    Data de Resgate   +   Status de Adoção   +   Histórico médico   |");
+        System.out.println("+---------+----------------------+----------------------+----------------------+-------+----------------------+----------------------+----------------------+----------------------+");
+        System.out.println("|   ID    |         Nome         +        Espécie       +         Raça         + Idade +         Sexo         +    Data de Resgate   +   Status de Adoção   +   Histórico médico   |");
 
         for (Animal animal: animais) {
 
@@ -85,7 +85,11 @@ public class Tabelar {
                 animalHistoricoMedico += colocarEspaco(20 - animalHistoricoMedico.length());
             }
 
-            System.out.println("+----------------------+----------------------+----------------------+-------+----------------------+----------------------+----------------------+----------------------+");
+            String animalID = Integer.toString(animal.getID());
+            animalID += colocarEspaco(7 - animalID.length());
+
+            System.out.println("+---------+----------------------+----------------------+----------------------+-------+----------------------+----------------------+----------------------+----------------------+");
+            System.out.format("| %s ", animalID);
             System.out.format("| %s ", animalNome);
             System.out.format("| %s ", animalEspecie);
             System.out.format("| %s ", animalRaca);
@@ -97,7 +101,7 @@ public class Tabelar {
 
         }
 
-        System.out.println("+----------------------+----------------------+----------------------+-------+----------------------+----------------------+----------------------+----------------------+");
+        System.out.println("+---------+----------------------+----------------------+----------------------+-------+----------------------+----------------------+----------------------+----------------------+");
     }
 
     public static void tabelarUsuario(ArrayList<Usuario> usuarios){
@@ -195,6 +199,54 @@ public class Tabelar {
                 usuario.getTelefone(),
                 usuario.getDataDeNascimento(),
                 usuario.getEndereco()
+        };
+
+        // Encontrar a largura máxima da coluna da esquerda (campos)
+        int larguraCampos = 0;
+        for (String campo : campos) {
+            if (campo.length() > larguraCampos) {
+                larguraCampos = campo.length();
+            }
+        }
+
+        // Encontrar a largura máxima da coluna da direita (valores)
+        int larguraValores = 0;
+        for (String valor : valores) {
+            if (valor.length() > larguraValores) {
+                larguraValores = valor.length();
+            }
+        }
+
+        // Criar a linha de separação da tabela
+        String linhaSeparadora = "+" + "-".repeat(larguraCampos + 2) + "+" + "-".repeat(larguraValores + 2) + "+";
+
+        // Imprimir a tabela
+        System.out.println(linhaSeparadora);
+
+        // Imprimir os campos e valores com separadores entre cada linha
+        for (int i = 0; i < campos.length; i++) {
+            System.out.format("| %-" + larguraCampos + "s | %-" + larguraValores + "s |\n", campos[i], valores[i]);
+            System.out.println(linhaSeparadora); // Separador após cada linha
+        }
+    }
+
+    public static void tabelarPreferencias(Preferencias preferencias) {
+        // Definindo os rótulos (nomes dos campos) na coluna da esquerda
+        String[] campos = {
+                "Espécie",
+                "Idade Mínima",
+                "Idade Máxima",
+                "Raça",
+                "Sexo"
+        };
+
+        // Obtendo os valores correspondentes na coluna da direita
+        String[] valores = {
+                preferencias.getEspecie(),
+                Integer.toString(preferencias.getIdadeMinima()),
+                Integer.toString(preferencias.getIdadeMaxima()),
+                preferencias.getRaca(),
+                preferencias.getSex()
         };
 
         // Encontrar a largura máxima da coluna da esquerda (campos)
